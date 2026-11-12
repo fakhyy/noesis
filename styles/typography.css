@@ -1,0 +1,121 @@
+/*
+ * Minimal typography for a thoughts-taking app.
+ * Uses the theme tokens (--foreground, --muted-foreground, --border, --muted, --primary, --font-*).
+ * Usage: <div class="prose"> ... </div>
+ * Headings are intentionally small: h2 → h4 stay close to body size.
+ * (h1 is meant to be the note title, styled by the app itself.)
+ */
+
+@layer components {
+  .prose {
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 65ch;
+  }
+
+  /* Rhythm */
+  .prose :where(p, ul, ol, blockquote, pre, hr):not(:where(.not-prose *)) {
+    margin-block: 0.85em;
+  }
+
+  /* Headings: small and quiet */
+  .prose :where(h2, h3, h4):not(:where(.not-prose *)) {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    margin-block: 1.5em 0.4em;
+  }
+  .prose :where(h2):not(:where(.not-prose *)) {
+    font-size: 1.25rem;
+  }
+  .prose :where(h3):not(:where(.not-prose *)) {
+    font-size: 1.125rem;
+  }
+  .prose :where(h4):not(:where(.not-prose *)) {
+    font-size: 1rem;
+    color: var(--color-muted-foreground);
+  }
+
+  /* First element shouldn't add top space */
+  .prose > :first-child {
+    margin-top: 0;
+  }
+
+  /* Links */
+  .prose :where(a):not(:where(.not-prose *)) {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--color-border);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s;
+  }
+  .prose :where(a):not(:where(.not-prose *)):hover {
+    text-decoration-color: currentColor;
+  }
+
+  /* Inline emphasis */
+  .prose :where(strong):not(:where(.not-prose *)) {
+    font-weight: 600;
+  }
+
+  /* Lists */
+  .prose :where(ul, ol):not(:where(.not-prose *)) {
+    padding-inline-start: 1.4em;
+  }
+  .prose :where(ul):not(:where(.not-prose *)) {
+    list-style: disc;
+  }
+  .prose :where(ol):not(:where(.not-prose *)) {
+    list-style: decimal;
+  }
+  .prose :where(li):not(:where(.not-prose *)) {
+    margin-block: 0.25em;
+  }
+  .prose :where(li)::marker {
+    color: var(--color-muted-foreground);
+  }
+
+  /* Quote */
+  .prose :where(blockquote):not(:where(.not-prose *)) {
+    padding-inline-start: 1em;
+    border-inline-start: 2px solid var(--color-border);
+    color: var(--color-muted-foreground);
+  }
+
+  /* Code */
+  .prose :where(code):not(:where(.not-prose *)) {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--color-muted);
+    padding: 0.15em 0.35em;
+    border-radius: var(--radius-sm);
+  }
+  .prose :where(pre):not(:where(.not-prose *)) {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    background: var(--color-muted);
+    padding: 0.75em 1em;
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+  }
+  .prose :where(pre code):not(:where(.not-prose *)) {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  /* Divider */
+  .prose :where(hr):not(:where(.not-prose *)) {
+    border: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* Selection */
+  .prose ::selection {
+    background: color-mix(in oklch, var(--color-primary) 18%, transparent);
+  }
+}

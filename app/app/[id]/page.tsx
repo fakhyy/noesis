@@ -5,6 +5,5 @@ export default async function ({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  let { id } = await params;
   return <ThoughtPage />;
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { AppSidebar } from "@/components/app-sidebar";
 import {
   SidebarInset,
@@ -6,8 +8,10 @@ import {
 } from "@/components/ui/sidebar";
 import { Switch } from "@/components/ui/switch";
 import React from "react";
+import { useEditContent } from "./[id]/use-edit";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
+  const { setIsEditable } = useEditContent();
   return (
     <SidebarProvider
       style={
@@ -22,7 +26,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <SidebarTrigger />
 
           <div className="flex items-center gap-2">
-            <Switch aria-label="Toggle setting" />
+            <Switch
+              aria-label="Toggle setting"
+              onCheckedChange={setIsEditable}
+            />
           </div>
         </header>
 

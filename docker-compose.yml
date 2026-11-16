@@ -4,9 +4,9 @@ services:
     container_name: noesis-db
     restart: unless-stopped
     environment:
-      POSTGRES_USER: noesis
-      POSTGRES_PASSWORD: noesis_dev
-      POSTGRES_DB: noesis
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: mydb
     ports:
       - "5432:5432"
     volumes:

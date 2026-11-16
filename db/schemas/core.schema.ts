@@ -28,10 +28,6 @@ export const thoughts = pgTable(
   ],
 );
 
-export const userRelations = relations(user, ({ many }) => ({
-  thoughts: many(thoughts),
-}));
-
 export const thoughtsRelations = relations(thoughts, ({ one }) => ({
   user: one(user, {
     fields: [thoughts.userId],

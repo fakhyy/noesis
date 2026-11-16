@@ -2,7 +2,7 @@ import z from "zod";
 import { thoughtRepository } from "@/repositories";
 import type { NextRequest } from "next/server";
 import { searchQuerySchema, thoughtInsertSchema } from "@/schemas";
-import { DrizzleQueryError, UnauthorizedError } from "@/lib/error";
+import { DrizzleQueryError, ApiError } from "@/lib/error";
 import { getUser } from "@/lib/auth/server";
 import { buildSearchQuery } from "@/lib/url";
 
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
       { status: 234 },
     );
   } catch (error) {
-    if (error instanceof UnauthorizedError) {
+    if (error instanceof ApiError) {
       return Response.json(
         {
           error: error.message,
@@ -63,6 +63,7 @@ export async function GET(req: NextRequest) {
     let query = buildThoughtQuery(req.url);
 
     let thoughtRecords = await thoughtRepository.list(user.id, query);
+    console.log(thoughtRecords);
 
     return Response.json(
       {
@@ -71,7 +72,7 @@ export async function GET(req: NextRequest) {
       { status: 200 },
     );
   } catch (error) {
-    if (error instanceof UnauthorizedError) {
+    if (error instanceof ApiError) {
       return Response.json(
         {
           error: error.message,

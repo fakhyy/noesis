@@ -1,9 +1,10 @@
+import { Suspense } from "react";
 import { ThoughtPage } from "./ThoughtPage";
 
-export default async function ({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  return <ThoughtPage />;
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading editor...</div>}>
+      <ThoughtPage />
+    </Suspense>
+  );
 }

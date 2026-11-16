@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { apiKey } from "@better-auth/api-key";
 import { nextCookies } from "better-auth/next-js";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { openAPI } from "better-auth/plugins";
 
 import { db } from "@/db";
 import { env } from "@/lib/env";
@@ -12,7 +13,7 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
-    disableSignUp: Boolean(env.ENABLE_SIGNUP),
+    // disableSignUp: Boolean(env.DISABLE_SIGNUP),
   },
-  plugins: [apiKey(), nextCookies()],
+  plugins: [openAPI(), apiKey(), nextCookies()],
 });

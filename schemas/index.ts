@@ -22,3 +22,16 @@ export const thoughtUpdateSchema = z.object({
   title: z.string({ error: "Title is invalid" }).min(1).optional(),
   content: z.string().optional(),
 });
+
+// ================= Form Fields Related ================== //
+
+export const nameSchema = z
+  .string()
+  .min(3, { error: "Name should be 3 characters long" });
+export const emailSchema = z.email({
+  error: "Please enter a valid email address",
+});
+
+export const passwordSchema = z
+  .string()
+  .min(8, { error: "Password should be minimum 8 characters long" });

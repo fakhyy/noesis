@@ -22,7 +22,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     >
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-12 shrink-0 items-center justify-between border-b bg-accent/32 px-3">
+        <header className="flex h-12 shrink-0 items-center justify-between -accent/32 px-3">
           <SidebarTrigger />
 
           <div className="flex items-center gap-2">
